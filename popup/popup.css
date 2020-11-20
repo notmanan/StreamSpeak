@@ -5,7 +5,7 @@
     cursor: pointer;
     visibility: visible;
   }
-  
+
   /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: visible;
@@ -22,29 +22,29 @@
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
-    line-height: 16px;
     bottom: 125%;
     left: 50%;
     margin-left: -80px;
+    cursor: pointer;
   }
 
   .popup .popupimage {
     margin-top: 9px;
   }
 
-  .popup .spacingExtra {
+  .spacingExtra {
     padding: 16px 0 8px 0;
   }
 
-  .popup .spacingExtra:hover {
+  .spacingExtra:hover {
     background-color: #535361;
   }
 
-  .popup .spacingReport {
+  .spacingReport {
     padding: 8px 0 16px 0;
   }
 
-  .popup .spacingReport:hover {
+  .spacingReport:hover {
     background-color: #535361;
   }
 
@@ -58,9 +58,9 @@
     position: absolute;
     z-index: 1;
     margin-left: -8px;
-    margin-top: 6px;
+    margin-top: 42px;
   }
-  
+
   /* Popup arrow
   .popup .popuptext::after {
     content: "";
@@ -72,20 +72,20 @@
     border-style: solid;
     border-color: #555 transparent transparent transparent;
   } */
-  
+
   /* Toggle this class when clicking on the popup container (hide and show the popup) */
   .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
   }
-  
+
   /* Add animation (fade in the popup) */
   @-webkit-keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
   }
-  
+
   @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
