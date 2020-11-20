@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="popup.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&display=swap" rel="stylesheet">
+<script>
+
+    // When the user clicks on <div>, open the popup
+    function showPopup() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+
+    function toggleContent() {
+        var x = document.getElementById("collapse");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+</script>
+</head>
+<body>
+<p>jgeaerr</p>
+<p>wgarar</p>
+<p>ewgaweawawr</p>
+<div class="popup" ondblclick="showPopup()">
+    hgchgvhgvvjgvgjjgc double click me senpai!
+    <span class="popuptext" id="myPopup">
+        Popup text...
+        <img src="Icon_save_outline.png" width="24px" height="24px" class="popupimage">
+        <img src="Icon_right_outline.png" width="24px" height="24px" onclick="toggleContent()" class="popupimage">
+        
+        <div class="content" id="collapse">
+            <div class="spacingExtra">Find out more <img src="Icon_export.png" width="22px"></div>
+            <div class="spacingReport">Report as incorrect <img src="Icon_report.png" width="22px"></div>
+        </div>
+    </span>
+</div>
+
+</body>
+</html>
+
