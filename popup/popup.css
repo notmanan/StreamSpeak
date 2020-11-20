@@ -2,7 +2,6 @@
 .popup {
     position: relative;
     display: inline-block;
-    cursor: pointer;
   }
   
   /* The actual popup (appears on top) */
@@ -21,29 +20,29 @@
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
-    line-height: 16px;
     bottom: 125%;
     left: 50%;
     margin-left: -80px;
+    cursor: pointer;
   }
 
   .popup .popupimage {
     margin-top: 9px;
   }
 
-  .popup .spacingExtra {
+  .spacingExtra {
     padding: 16px 0 8px 0;
   }
 
-  .popup .spacingExtra:hover {
+  .spacingExtra:hover {
     background-color: #535361;
   }
 
-  .popup .spacingReport {
+  .spacingReport {
     padding: 8px 0 16px 0;
   }
 
-  .popup .spacingReport:hover {
+  .spacingReport:hover {
     background-color: #535361;
   }
 
@@ -57,7 +56,7 @@
     position: absolute;
     z-index: 1;
     margin-left: -8px;
-    margin-top: 6px;
+    margin-top: 42px;
   }
   
   /* Popup arrow
