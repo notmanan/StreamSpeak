@@ -3,11 +3,12 @@
     position: relative;
     display: inline-block;
     cursor: pointer;
+    visibility: visible;
   }
   
   /* The actual popup (appears on top) */
   .popup .popuptext {
-    visibility: hidden;
+    visibility: visible;
     width: 312px;
     height: 42px;
     background-color: #464649;

@@ -1,13 +1,22 @@
 {
-  
     "manifest_version": 2,
-    "name": "sample",
-    "description": "A sample extension to get the selected text",
-    "version": "1.0",
+    "name": "StreamSpeak",
+    "description": "GgEz",
+    "version": "1.1",
     "browser_action": {
-        "default_popup": "popup.html"
+        "default_popup": "popup/popup.html"
     },
+    "content_scripts": [
+        {
+          "matches": ["https://*/*"],
+          "css": ["popup/popup.css"],
+          "js": ["contentscript.js"],
+          "run_at": "document_end",
+          "all_frames": true
+        }
+    ],
     "permissions": [
         "activeTab"
     ]
+
 }
