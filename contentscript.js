@@ -1,35 +1,220 @@
-// Add bubble to the top of the page.
 var bubbleDOM = document.createElement('div');
-bubbleDOM.setAttribute('class', 'popup');
+bubbleDOM.setAttribute('class', 'popup-container');
+bubbleDOM.setAttribute('id', 'popup-container');
 document.body.appendChild(bubbleDOM);
-console.log("Bro I work");
+
+var twitchChat = document.getElementsByClassName("simplebar-content");
+console.log(twitchChat);
+
+
 
 // Lets listen to mouseup DOM events.
 document.addEventListener('mouseup', function (e) {
   var selection = window.getSelection().toString();
-  if (selection.length > 0) {
+  console.log(selection);
+  selection.split(" ").join("");
+  if (selection.length > 0 && selection != null) {
     renderBubble(e.clientX, e.clientY, selection);
-    console.log("I tried to render bro");
+    bubbleDOM.style.display = 'block';
+    console.log("bruh moment 1");
   }
 }, false);
 
+var expandIcon = document.getElementById("expand-icon");
 
 // Close the bubble when we click on the screen.
 document.addEventListener('mousedown', function (e) {
-  bubbleDOM.style.visibility = 'hidden';
-  console.log("I hiding bro");
+    // if (isDown != true) {
+        var elementId = (e.target).id;
+        var elementClass = (e.target).className;
+        console.log(elementId);
+        console.log("class", elementClass);
+        if (e.target.classList.contains("social-media-space--content")) { 
+            bubbleDOM.style.visibility = 'hidden';
+            bubbleDOM.style.display = 'none';
+            console.log("bruh moment 2");
+        } else if (elementId == "expand-icon") {
+            var collapseMenu = document.getElementById("collapse");
+
+            console.log("bruh moment 3");
+            if(collapseMenu.style.visibility == 'hidden') {
+                collapseMenu.style.visibility = 'visible';
+            } else {
+                collapseMenu.style.visibility = 'hidden';
+            }
+        }
+        
+    // }
+   
 }, false);
+
+
+
+expandIcon.addEventListener('mousedown', function() {
+    console.log("bruh moment 3");
+    
+});
+
+// Close the bubble when we click on the screen.
+document.addEventListener('mousedown', function (e) {
+    // if (isDown != true) {
+        var elementId = (e.target || e.srcElement).id;
+        console.log(elementId);
+        if (elementId == "pPost") {
+            bubbleDOM.style.visibility = 'hidden';
+            bubbleDOM.style.display = 'none';
+            console.log("bruh moment 2");
+        }
+        
+    // }
+   
+}, false);
+
+
+
 
 // Move that bubble to the appropriate location.
 function renderBubble(mouseX, mouseY, selection) {
-  var client = new XMLHttpRequest();
-  client.open('GET', 'popup/popup.html');
-  client.onreadystatechange = function() {
-    bubbleDOM.innerHTML = client.responseText;
-    console.log("loading stuff bro");
+  bubbleDOM.innerHTML = `<style>
+  .popup {
+      position: absolute;
+      display: inline-block;
+      cursor: pointer;
+      visibility: visible;
   }
-  client.send();  
+
+  /* The actual popup (appears on top) */
+  .popup {
+      visibility: visible;
+      width: 100%;
+      color: #fff;
+      text-align: left;
+      border-radius: 4px;
+      z-index: 1;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      cursor: pointer;
+  }
+
+  .popup-header {
+    padding: 8px 15px;
+    background-color: #464649;
+    vertical-align: middle;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .content {
+    // display: none;
+    background-color: #535361;
+    padding: 8px;
+    border-radius: 0px 0px 4px 4px;
+    // visibility: hidden;
+}
+
+.content .action-option {
+    padding: 8px
+}
+
+  .popup .popup-image {
+    max-width: 20px;
+  }
+
+  .selection-name, .images-container {
+      display: inline-block;
+  }
+
+  .images-container {
+      float: right;
+  }
+
+  .popup-image:not(:last-child) {
+      margin: 0 3px;
+  }
+
+  .selection-name {
+      vertical-align: middle;
+  }
+
+  #collapse {
+      visibility: hidden;
+  }
+
+//   .spacingExtra {
+//       padding: 16px 0 8px 0;
+//   }
+
+//   .spacingExtra:hover {
+//       background-color: #535361;
+//   }
+
+//   .spacingReport {
+//       padding: 8px 0 16px 0;
+//   }
+
+//   .spacingReport:hover {
+//       background-color: #535361;
+//   }
+
+  /* Popup arrow
+  .popup .popuptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+  } */
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s
+  }
+
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+
+  @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity:1 ;}
+  }
+</style>
+
+<div class="popup">
+    <div class="popup-header">
+        <span class="selection-name">`+selection+`</span>
+        <span class="images-container">
+            <img class="popup-image" id="save-icon;" src="https://emenimor.sirv.com/StreamSpeak/Icon_save_outline.png"" width="24px" height="24px">
+            <img class="popup-image" id="expand-icon" src="https://emenimor.sirv.com/StreamSpeak/Icon_right_outline.png" width="24px" height="24px">
+        </span>
+    </div>
+    <div class="content" id="collapse">
+        <div class="action-option" id="spacingExtra">
+            Find out more 
+            <span class="images-container">
+                <img src="https://emenimor.sirv.com/StreamSpeak/Icon_export.png">
+            </span>
+        </div>
+        <div class="action-option" id="spacingReport">
+            Report as incorrect 
+            <span class="images-container">
+                <img src="https://emenimor.sirv.com/StreamSpeak/Icon_report.png">
+            </span>
+        </div>
+    </div>
+</div>
+
+`
+
   bubbleDOM.style.top = mouseY + 'px';
-  bubbleDOM.style.left = mouseX + 'px';
+  bubbleDOM.style.left = (window.innerWidth - 320) + 'px';
   bubbleDOM.style.visibility = 'visible';
 }

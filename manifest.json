@@ -1,15 +1,12 @@
 {
     "manifest_version": 2,
-    "name": "StreamSpeak",
-    "description": "GgEz",
+    "name": "bruh",
+    "description": "L",
     "version": "1.1",
-    "browser_action": {
-        "default_popup": "popup/popup.html"
-    },
     "content_scripts": [
         {
           "matches": ["https://*/*"],
-          "css": ["popup/popup.css"],
+          "css": ["contentscript.css"],
           "js": ["contentscript.js"],
           "run_at": "document_end",
           "all_frames": true
@@ -18,5 +15,4 @@
     "permissions": [
         "activeTab"
     ]
-
 }
