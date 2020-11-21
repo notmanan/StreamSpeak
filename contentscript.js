@@ -6,21 +6,13 @@ document.body.appendChild(bubbleDOM);
 var twitchChat = document.getElementsByClassName("simplebar-content");
 console.log(twitchChat);
 
-
-
 // Lets listen to mouseup DOM events.
 document.addEventListener('mouseup', function (e) {
   var selection = window.getSelection().toString();
   console.log(selection);
   selection.split(" ").join("");
   if (selection.length > 0 && selection != null) {
-    // var response = fetch(`https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=`+selection, {
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-rapidapi-key": "dad8496964mshaf6afb73ab66a72p130bc8jsn1b8bd2f19908",
-    //         "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com"
-    //     }
-    // });
+
     fetch("https://mashape-community-urban-dictionary.p.rapidapi.com/define?term="+selection, {
 	"method": "GET",
 	"headers": {
@@ -30,19 +22,14 @@ document.addEventListener('mouseup', function (e) {
 })
 .then(response => response.json())
 .then(data => {
-
-    console.log(selection);
-    console.log("JSON DATA:"+data.list[0]["definition"]);
-    selection += ": "+data.list[1]["definition"];
-    console.log(selection);
-    renderBubble(e.clientX, e.clientY, selection);
+    meaning = data.list[1]["definition"];
+    renderBubble(e.clientX, e.clientY, selection, meaning);
     bubbleDOM.style.display = 'block';
     }
 )
 .catch(err => {
 	console.error(err);
 });
-    // console.log(response);
     console.log("bruh moment 1");
   }
 }, false);
@@ -56,7 +43,7 @@ document.addEventListener('mousedown', function (e) {
         var elementClass = (e.target).className;
         console.log(elementId);
         console.log("class", elementClass);
-        if (e.target.classList.contains("social-media-space--content")) { 
+        if (e.target.classList.contains("social-media-space--content")) {
             bubbleDOM.style.visibility = 'hidden';
             bubbleDOM.style.display = 'none';
             console.log("bruh moment 2");
@@ -70,17 +57,8 @@ document.addEventListener('mousedown', function (e) {
                 collapseMenu.style.visibility = 'hidden';
             }
         }
-        
-    // }
-   
 }, false);
 
-
-
-// expandIcon.addEventListener('mousedown', function() {
-//     console.log("bruh moment 3");
-    
-// });
 
 // Close the bubble when we click on the screen.
 document.addEventListener('mousedown', function (e) {
@@ -92,16 +70,10 @@ document.addEventListener('mousedown', function (e) {
             bubbleDOM.style.display = 'none';
             console.log("bruh moment 2");
         }
-        
-    // }
-   
 }, false);
 
-
-
-
 // Move that bubble to the appropriate location.
-function renderBubble(mouseX, mouseY, selection) {
+function renderBubble(mouseX, mouseY, selection, meaning) {
   bubbleDOM.innerHTML = `<style>
   .popup {
       position: absolute;
@@ -217,7 +189,8 @@ function renderBubble(mouseX, mouseY, selection) {
 
 <div class="popup">
     <div class="popup-header">
-        <span class="selection-name">`+selection+`</span>
+    <span class="selection-name"><b>`+selection+`: </b></span>
+    <span class="selection-def"><b>`+meaning+`</b></span>
         <span class="images-container">
             <img class="popup-image" id="save-icon;" src="https://emenimor.sirv.com/StreamSpeak/Icon_save_outline.png"" width="24px" height="24px">
             <img class="popup-image" id="expand-icon" src="https://emenimor.sirv.com/StreamSpeak/Icon_right_outline.png" width="24px" height="24px">
@@ -225,13 +198,13 @@ function renderBubble(mouseX, mouseY, selection) {
     </div>
     <div class="content" id="collapse">
         <div class="action-option" id="spacingExtra">
-            Find out more 
+            Find out more
             <span class="images-container">
                 <img src="https://emenimor.sirv.com/StreamSpeak/Icon_export.png">
             </span>
         </div>
         <div class="action-option" id="spacingReport">
-            Report as incorrect 
+            Report as incorrect
             <span class="images-container">
                 <img src="https://emenimor.sirv.com/StreamSpeak/Icon_report.png">
             </span>
@@ -240,7 +213,6 @@ function renderBubble(mouseX, mouseY, selection) {
 </div>
 
 `
-
   bubbleDOM.style.top = mouseY + 'px';
   bubbleDOM.style.left = (window.innerWidth - 320) + 'px';
   bubbleDOM.style.visibility = 'visible';
