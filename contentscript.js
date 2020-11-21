@@ -14,8 +14,35 @@ document.addEventListener('mouseup', function (e) {
   console.log(selection);
   selection.split(" ").join("");
   if (selection.length > 0 && selection != null) {
+    // var response = fetch(`https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=`+selection, {
+    //     "method": "GET",
+    //     "headers": {
+    //         "x-rapidapi-key": "dad8496964mshaf6afb73ab66a72p130bc8jsn1b8bd2f19908",
+    //         "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com"
+    //     }
+    // });
+    fetch("https://mashape-community-urban-dictionary.p.rapidapi.com/define?term="+selection, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "dad8496964mshaf6afb73ab66a72p130bc8jsn1b8bd2f19908",
+		"x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com"
+	}
+})
+.then(response => response.json())
+.then(data => {
+
+    console.log(selection);
+    console.log("JSON DATA:"+data.list[0]["definition"]);
+    selection += ": "+data.list[1]["definition"];
+    console.log(selection);
     renderBubble(e.clientX, e.clientY, selection);
     bubbleDOM.style.display = 'block';
+    }
+)
+.catch(err => {
+	console.error(err);
+});
+    // console.log(response);
     console.log("bruh moment 1");
   }
 }, false);
@@ -50,10 +77,10 @@ document.addEventListener('mousedown', function (e) {
 
 
 
-expandIcon.addEventListener('mousedown', function() {
-    console.log("bruh moment 3");
+// expandIcon.addEventListener('mousedown', function() {
+//     console.log("bruh moment 3");
     
-});
+// });
 
 // Close the bubble when we click on the screen.
 document.addEventListener('mousedown', function (e) {
