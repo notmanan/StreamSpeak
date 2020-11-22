@@ -22,7 +22,8 @@ document.addEventListener('mouseup', function (e) {
 })
 .then(response => response.json())
 .then(data => {
-    meaning = data.list[1]["definition"];
+    console.log(data);
+    meaning = data.list[0]["definition"];
     renderBubble(e.clientX, e.clientY, selection, meaning);
     bubbleDOM.style.display = 'block';
     }
