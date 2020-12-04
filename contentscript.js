@@ -10,8 +10,9 @@ console.log(twitchChat);
 document.addEventListener('mouseup', function (e) {
   var selection = window.getSelection().toString();
   console.log(selection);
+  
   selection.split(" ").join("");
-  if (selection.length > 0 && selection != null) {
+  if (selection.length > 0 && selection != null && e.target.className.includes("text-fragment")) {
 
     fetch("https://mashape-community-urban-dictionary.p.rapidapi.com/define?term="+selection, {
 	"method": "GET",
@@ -44,10 +45,13 @@ document.addEventListener('mousedown', function (e) {
         var elementClass = (e.target).className;
         console.log(elementId);
         console.log("class", elementClass);
-        if (e.target.classList.contains("social-media-space--content")) {
+        if (!e.target.className.includes("popup") && !e.target.className.includes("selection") && !e.target.className.includes("expand-icon") && !e.target.className.includes("cursorsHover")) {
+            console.log("hiding it rn");
             bubbleDOM.style.visibility = 'hidden';
             bubbleDOM.style.display = 'none';
             console.log("bruh moment 2");
+            let sel = document.getSelection();
+            sel.removeAllRanges();
         } else if (elementId == "expand-icon") {
             var collapseMenu = document.getElementById("collapse");
 
@@ -105,7 +109,7 @@ function renderBubble(mouseX, mouseY, selection, meaning) {
     border-radius: 4px 4px 0 0;
   }
 
-  .content {
+  .popup-content {
     // display: none;
     background-color: #535361;
     padding: 8px;
@@ -113,7 +117,7 @@ function renderBubble(mouseX, mouseY, selection, meaning) {
     // visibility: hidden;
 }
 
-.content .action-option {
+.popup-content .popup-action-option {
     padding: 8px
 }
 
@@ -197,14 +201,14 @@ function renderBubble(mouseX, mouseY, selection, meaning) {
             <img class="popup-image" id="expand-icon" src="https://emenimor.sirv.com/StreamSpeak/Icon_right_outline.png" width="24px" height="24px">
         </span>
     </div>
-    <div class="content" id="collapse">
-        <div class="action-option" id="spacingExtra">
+    <div class="popup-content" id="collapse">
+        <div class="popup-action-option" id="spacingExtra">
             Find out more
             <span class="images-container">
                 <img src="https://emenimor.sirv.com/StreamSpeak/Icon_export.png">
             </span>
         </div>
-        <div class="action-option" id="spacingReport">
+        <div class="popup-action-option" id="spacingReport">
             Report as incorrect
             <span class="images-container">
                 <img src="https://emenimor.sirv.com/StreamSpeak/Icon_report.png">
@@ -212,7 +216,6 @@ function renderBubble(mouseX, mouseY, selection, meaning) {
         </div>
     </div>
 </div>
-
 `
   bubbleDOM.style.top = mouseY + 'px';
   bubbleDOM.style.left = (window.innerWidth - 320) + 'px';
